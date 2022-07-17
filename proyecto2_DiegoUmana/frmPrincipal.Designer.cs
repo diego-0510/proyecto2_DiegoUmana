@@ -60,9 +60,9 @@ namespace proyecto2_DiegoUmana
             // btnIngresar
             // 
             this.btnIngresar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnIngresar.Location = new System.Drawing.Point(194, 301);
+            this.btnIngresar.Location = new System.Drawing.Point(252, 301);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(93, 29);
+            this.btnIngresar.Size = new System.Drawing.Size(105, 29);
             this.btnIngresar.TabIndex = 2;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@ namespace proyecto2_DiegoUmana
             // 
             this.lblHora.AutoSize = true;
             this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHora.Location = new System.Drawing.Point(187, 27);
+            this.lblHora.Location = new System.Drawing.Point(176, 35);
             this.lblHora.MinimumSize = new System.Drawing.Size(100, 50);
             this.lblHora.Name = "lblHora";
             this.lblHora.Size = new System.Drawing.Size(100, 50);
@@ -85,20 +85,20 @@ namespace proyecto2_DiegoUmana
             // 
             // picBoxFoto
             // 
-            this.picBoxFoto.Location = new System.Drawing.Point(166, 100);
+            this.picBoxFoto.Location = new System.Drawing.Point(137, 71);
             this.picBoxFoto.Name = "picBoxFoto";
-            this.picBoxFoto.Size = new System.Drawing.Size(157, 98);
+            this.picBoxFoto.Size = new System.Drawing.Size(230, 146);
             this.picBoxFoto.TabIndex = 5;
             this.picBoxFoto.TabStop = false;
             // 
             // btnHabilitar
             // 
             this.btnHabilitar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnHabilitar.Location = new System.Drawing.Point(80, 301);
+            this.btnHabilitar.Location = new System.Drawing.Point(118, 301);
             this.btnHabilitar.Name = "btnHabilitar";
-            this.btnHabilitar.Size = new System.Drawing.Size(93, 29);
+            this.btnHabilitar.Size = new System.Drawing.Size(106, 29);
             this.btnHabilitar.TabIndex = 6;
-            this.btnHabilitar.Text = "habilitar";
+            this.btnHabilitar.Text = "Habilitar Camara";
             this.btnHabilitar.UseVisualStyleBackColor = true;
             this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
             // 
@@ -106,7 +106,7 @@ namespace proyecto2_DiegoUmana
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 428);
+            this.ClientSize = new System.Drawing.Size(482, 369);
             this.Controls.Add(this.btnHabilitar);
             this.Controls.Add(this.picBoxFoto);
             this.Controls.Add(this.lblHora);
