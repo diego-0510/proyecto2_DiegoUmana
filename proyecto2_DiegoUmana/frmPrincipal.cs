@@ -27,25 +27,91 @@ namespace proyecto2_DiegoUmana
         Bitmap image;
         private Thread camera;
         bool isCameraRunning=false;
+       
+        private bool buscarCedula()//buscar en la BD si el empleado esta registrado
+        {
+            bool flag = false;
+            string[] datos = { "nombre"};
+            string condicion = " where cedula =" + txtCedula.Text;
+
+            DataTable informacion = consultar.consultaTodosElementos("empleados", datos, condicion);
+            //resultado = informacion.Rows[0]["nombre"].ToString();
+            if (informacion.Rows.Count > 0 && informacion != null )
+            {
+                
+                flag = true;
+            }
+            else
+            {
+                MessageBox.Show("Empleado no existente", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flag;
+        }
+        
+        private string entradaSalida()
+        {
+            string[] datos = { "marca" };
+            string condicion = " where cedula =" + txtCedula.Text;
+            string resultado = "";
+            string info = "";
+            DataTable informacion = consultar.consultaTodosElementos("registromarcas", datos, condicion);
+            if (informacion.Rows.Count > 0 && informacion != null)
+            {
+
+                info = cargarInformacion(informacion);
+            }
+            else
+            {
+                info = "entrada";
+            }
+            
+            return info;
+        }
+
+        private string cargarInformacion(DataTable informacion)
+        {
+            string info = "";
+            string resultado = "";
+            resultado = informacion.Rows[0]["marca"].ToString();
+            if (resultado == "")
+            {
+                info = "entrada";
+            }
+            if (resultado == "entrada")
+            {
+                info = "salida";
+            }
+            if (resultado == "salida")
+            {
+                info = "entrada";
+            }
+            return info;
+
+        }
 
         private dynamic[] ingresarInformacion()
         {
             dynamic[] datos = new dynamic[5];
+            bool flag = buscarCedula();
             if (isCameraRunning == true)
             {
                 
-                // Tome una instantánea de la imagen actual generada por OpenCV en el cuadro de imagen
-                int cedula = int.Parse(txtCedula.Text);
-                Bitmap snapshot = new Bitmap(picBoxFoto.Image);
-                datos[0] =cedula ;
-                datos[1] = snapshot;
-                datos[2] = DateTime.Now.ToString("hh:mm:ss");
-                datos[3] = DateTime.Now.ToString("dd-MM-yyyy");
-                datos[4] = "";
+                if (flag == true)
+                {
+                    // Tome una instantánea de la imagen actual generada por OpenCV en el cuadro de imagen
+                    int cedula = int.Parse(txtCedula.Text);
+                    Bitmap snapshot = new Bitmap(picBoxFoto.Image);
+                    datos[0] = cedula;
+                    datos[1] = snapshot;
+                    datos[2] = DateTime.Now.ToString("hh:mm:ss");
+                    datos[3] = DateTime.Now.ToString("dd-MM-yyyy");
+                    string info=entradaSalida();
+                    datos[4] =info;
+                    // Guardar en algún directorio
+                    //snapshot.Save(string.Format("C://Users//franc//source//repos//proyecto2_DiegoUmana//foto.png", Guid.NewGuid()), ImageFormat.Png);
+                }
 
-
-                // Guardar en algún directorio
-                //snapshot.Save(string.Format("C://Users//franc//source//repos//proyecto2_DiegoUmana//foto.png", Guid.NewGuid()), ImageFormat.Png);
             }
             else
             {
@@ -87,7 +153,7 @@ namespace proyecto2_DiegoUmana
         private  void btnIngresar_Click(object sender, EventArgs e)
         {
             dynamic datos = ingresarInformacion();
-            string info=consultar.insertar("registromarcas",datos);
+            string info=consultar.insertar("registromarcas", datos);
             if (info.Equals("error"))
             {
                 MessageBox.Show("Informacion NO INGRESADA", "Error",
@@ -132,5 +198,14 @@ namespace proyecto2_DiegoUmana
 
         }
 
+        private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
     }
 }

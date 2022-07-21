@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace CapaDatos
                     }
                 }
                 campos += ")";
-                string insert_sql = "Insert into \"" + tabla + "\"values" + campos;
+                string insert_sql = "Insert into \"" + tabla + "\"(cedula, foto, hora, fecha, marca)" + " values" + campos;
                 NpgsqlCommand ejecutar = new NpgsqlCommand(insert_sql, conexion);
                 ejecutar.ExecuteNonQuery();//No se inserta la informacion hasta ejecutar este comando
                 desconectarPostgresSQL();
@@ -48,6 +49,24 @@ namespace CapaDatos
 
             }
             return "ok";
+        }
+
+        public static DataTable consultaUnDato(string query)
+        {
+            try
+            {
+                conectarPostgresSQL();
+                NpgsqlCommand conector = new NpgsqlCommand(query, conexion);
+                NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+                DataTable tabla = new DataTable();
+                datos.Fill(tabla);
+                desconectarPostgresSQL();
+                return tabla;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

@@ -115,6 +115,8 @@ namespace proyecto2_DiegoUmana
             this.Controls.Add(this.txtCedula);
             this.Name = "frmPrincipal";
             this.Text = "Entradas y Salidas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPrincipal_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxFoto)).EndInit();
             this.ResumeLayout(false);
